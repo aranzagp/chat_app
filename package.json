@@ -1,0 +1,7 @@
+{
+  "name": "chat_app",
+  "private": true,
+  "dependencies": {
+    "amqplib": "^0.5.2"
+  }
+}
