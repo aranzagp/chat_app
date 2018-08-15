@@ -1,7 +1,9 @@
-<form>
+<form id="groupChatForm"  class="mt-2">
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <label for="exampleFormControlTextarea1">Message</label>
+    <textarea class="form-control" id="message" data-username="dummyname" rows="3"></textarea>
   </div>
-  <button type="submit" onclick="submit()" class="btn btn-primary">Submit</button>
+  <button type="button" id="sendMessage" class="btn btn-primary">Send</button>
 </form>
+
+<%= javascript_include_tag 'group_chat/form' %>
