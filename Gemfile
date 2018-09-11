@@ -31,6 +31,13 @@ gem 'bunny', '>= 2.9.2'
 gem 'pry'
 
 gem 'jquery-rails'
+
+gem 'figaro'
+
+gem 'pusher'
+
+gem 'foreman'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
