@@ -10,6 +10,23 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+    <script>
+
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+
+      var pusher = new Pusher('<%= ENV['PUSHER_KEY']%>', {
+        cluster: 'us2',
+        encrypted: true
+      });
+
+      var channel = pusher.subscribe('chat-group');
+      channel.bind('public-message', function(data) {
+        $('.messages-list').append(`<li class='mt-2'><h5><span class='badge badge-light text-left'><p class='font-weight-light'>${data.user}</p><p class='font-weight-normal'>${data.message}</p></span></h5></li>`);
+      });
+    </script>
+
   </head>
 
   <body>

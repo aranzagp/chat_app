@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment'
+
+$stdout.sync = true
+running = true
+puts running
+Signal.trap(:TERM) { running = false }
+
+# while running
+  puts "RUNNING"
+  connection = Bunny.new
+  puts "Connection #{connection}"
+  connection.start
+  channel = connection.create_channel
+  puts "Channel #{channel}"
+  exchange = channel.fanout('logs')
+  puts "Exchange #{exchange}"
+  queue = channel.queue('', exclusive: true)
+  puts "Queue #{queue}"
+
+
+  def send_message(id)
+    message = Message.find(id)
+    Pusher.trigger('chat-group', 'public-message', {
+      id:  message.id,
+      user: message.username,
+      message: message.message
+    })
+  end
+
+  queue.bind(exchange)
+  begin
+    puts 'subscriberr'
+    queue.subscribe(block: true) do |_delivery_info, _properties, id|
+      send_message(id)
+      puts " Consumer #{id}"
+    end
+  rescue Interrupt => _
+    puts 'Error'
+    channel.close
+    connection.close
+  end
+
+  # Kernel.sleep 5
+# end
