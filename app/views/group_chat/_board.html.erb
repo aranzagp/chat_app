@@ -4,7 +4,7 @@
       <% @messages.each do |message| %>
         <li class="mt-2">
           <h5>
-            <span class="badge badge-light text-left">
+            <span class="badge badge-light text-left" style="background-color:<%= message.color%>">
               <p class="font-weight-light"><%= message.username %></p>
               <p class="font-weight-normal"><%= message.message %></p>
             </span>

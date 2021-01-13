@@ -23,7 +23,7 @@
 
       var channel = pusher.subscribe('chat-group');
       channel.bind('public-message', function(data) {
-        $('.messages-list').append(`<li class='mt-2'><h5><span class='badge badge-light text-left'><p class='font-weight-light'>${data.user}</p><p class='font-weight-normal'>${data.message}</p></span></h5></li>`);
+        $('.messages-list').append(`<li class='mt-2'><h5><span class='badge badge-light text-left' style='background-color: ${data.color};'><p class='font-weight-light'>${data.user}</p><p class='font-weight-normal'>${data.message}</p></span></h5></li>`);
       });
     </script>
 

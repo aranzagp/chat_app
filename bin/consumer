@@ -25,7 +25,8 @@ Signal.trap(:TERM) { running = false }
     Pusher.trigger('chat-group', 'public-message', {
       id:  message.id,
       user: message.username,
-      message: message.message
+      message: message.message,
+      color: message.color
     })
   end
 
